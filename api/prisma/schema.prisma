@@ -10,29 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model TodoItem {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  completed Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
-
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  auth0Id      String   @unique @default("")
-  name         String?
-  todos        TodoItem[]
-  stripeId     String?
-  currentPlan  plans? @default(FREE)
+  id           Int       @id @default(autoincrement())
+  movieJournal Journal[]
 }
 
-enum plans {
-  FREE
-  BASIC
-  PRO
-  MAX
+model Journal {
+  id      Int     @id
+  user    User    @relation(fields: [id], references: [id])
+  title   String
+  content String
+  Movie   Movie[]
+}
+
+model Movie {
+  id      Int     @id
+  journal Journal @relation(fields: [id], references: [id])
+  title   String
 }
