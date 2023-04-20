@@ -7,5 +7,6 @@
 -- AlterTable
 ALTER TABLE `User` ADD COLUMN `auth0Id` VARCHAR(191) NOT NULL DEFAULT '';
 
+
 -- CreateIndex
 CREATE UNIQUE INDEX `User_auth0Id_key` ON `User`(`auth0Id`);
