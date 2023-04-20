@@ -2,8 +2,8 @@ import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import Todos from "./components/Todos";
-import TodoDetail from "./components/TodoDetail";
+import Journals from "./components/Journals";
+import JournalDetail from "./components/JournalDetail";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
@@ -19,14 +19,14 @@ const container = document.getElementById("root");
 const requestedScopes = [
   "profile",
   "email",
-  "read:todoitem",
+  "read:journalitem",
   "read:user",
-  "edit:todoitem",
+  "edit:journalitem",
   "edit:user",
-  "delete:todoitem",
+  "delete:journalitem",
   "delete:user",
   "write:user",
-  "write:todoitem",
+  "write:journalitem",
 ];
 
 function RequireAuth({ children }) {
@@ -65,8 +65,8 @@ root.render(
                 </RequireAuth>
               }
             >
-              <Route path="todos" element={<Todos />} />
-              <Route path="todos/:todoId" element={<TodoDetail />} />
+              <Route path="journals" element={<Journals />} />
+              <Route path="journals/:journalId" element={<JournalDetail />} />
               <Route path="debugger" element={<AuthDebugger />} />
               <Route index element={<Profile />} />
             </Route>

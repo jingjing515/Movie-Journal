@@ -1,15 +1,15 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
+import * as dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import pkg from "@prisma/client";
 import morgan from "morgan";
 import cors from "cors";
-import { auth } from  'express-oauth2-jwt-bearer'
+import { auth } from "express-oauth2-jwt-bearer";
 
 const requireAuth = auth({
   audience: process.env.AUTH0_AUDIENCE,
   issuerBaseURL: process.env.AUTH0_ISSUER,
-  tokenSigningAlg: 'RS256'
+  tokenSigningAlg: "RS256",
 });
 
 const app = express();
@@ -26,7 +26,7 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-app.get("/todos", requireAuth, async (req, res) => {
+app.get("/journals", requireAuth, async (req, res) => {
   const auth0Id = req.auth.payload.sub;
 
   const user = await prisma.user.findUnique({
@@ -35,17 +35,17 @@ app.get("/todos", requireAuth, async (req, res) => {
     },
   });
 
-  const todos = await prisma.todoItem.findMany({
+  const journals = await prisma.journalItem.findMany({
     where: {
       authorId: user.id,
     },
   });
 
-  res.json(todos);
+  res.json(journals);
 });
 
-// creates a todo item
-app.post("/todos", requireAuth, async (req, res) => {
+// creates a journal item
+app.post("/journals", requireAuth, async (req, res) => {
   const auth0Id = req.auth.payload.sub;
 
   const { title } = req.body;
@@ -53,7 +53,7 @@ app.post("/todos", requireAuth, async (req, res) => {
   if (!title) {
     res.status(400).send("title is required");
   } else {
-    const newItem = await prisma.todoItem.create({
+    const newItem = await prisma.journalItem.create({
       data: {
         title,
         author: { connect: { auth0Id } },
@@ -64,10 +64,10 @@ app.post("/todos", requireAuth, async (req, res) => {
   }
 });
 
-// deletes a todo item by id
-app.delete("/todos/:id", requireAuth, async (req, res) => {
+// deletes a journal item by id
+app.delete("/journals/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
-  const deletedItem = await prisma.todoItem.delete({
+  const deletedItem = await prisma.journalItem.delete({
     where: {
       id,
     },
@@ -75,22 +75,22 @@ app.delete("/todos/:id", requireAuth, async (req, res) => {
   res.json(deletedItem);
 });
 
-// get a todo item by id
-app.get("/todos/:id", requireAuth, async (req, res) => {
+// get a journal item by id
+app.get("/journals/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
-  const todoItem = await prisma.todoItem.findUnique({
+  const journalItem = await prisma.journalItem.findUnique({
     where: {
       id,
     },
   });
-  res.json(todoItem);
+  res.json(journalItem);
 });
 
-// updates a todo item by id
-app.put("/todos/:id", requireAuth, async (req, res) => {
+// updates a journal item by id
+app.put("/journals/:id", requireAuth, async (req, res) => {
   const id = req.params.id;
   const { title } = req.body;
-  const updatedItem = await prisma.todoItem.update({
+  const updatedItem = await prisma.journalItem.update({
     where: {
       id,
     },

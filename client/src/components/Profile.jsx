@@ -14,6 +14,7 @@ export default function Profile() {
       <div>
         <p>📧 Email: {user.email}</p>
       </div>
+
       {/* <div>
         <p>🔑 Auth0Id: {user.sub}</p>
       </div> */}

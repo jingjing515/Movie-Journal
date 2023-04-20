@@ -13,7 +13,7 @@ export default function AppLayout() {
   return (
     <div className="app">
       <div className="title">
-        <h1>My Journal Space</h1>
+        <h1>My Journal</h1>
       </div>
       <div className="header">
         <nav className="menu">
@@ -22,7 +22,7 @@ export default function AppLayout() {
               <Link to="/app">Profile</Link>
             </li>
             <li>
-              <Link to="/app/todos">TODOs</Link>
+              <Link to="/app/journals">Journals</Link>
             </li>
             <li>
               <Link to="/app/debugger">Auth Debugger</Link>

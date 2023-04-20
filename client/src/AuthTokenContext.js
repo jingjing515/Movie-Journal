@@ -6,14 +6,14 @@ const AuthTokenContext = React.createContext();
 const requestedScopes = [
   "profile",
   "email",
-  "read:todoitem",
+  "read:journalitem",
   "read:user",
-  "edit:todoitem",
+  "edit:journalitem",
   "edit:user",
-  "delete:todoitem",
+  "delete:journalitem",
   "delete:user",
   "write:user",
-  "write:todoitem",
+  "write:journalitem",
 ];
 
 function AuthTokenProvider({ children }) {
@@ -26,7 +26,7 @@ function AuthTokenProvider({ children }) {
         const token = await getAccessTokenSilently({
           authorizationParams: {
             audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-            scope: requestedScopes.join(' ')
+            scope: requestedScopes.join(" "),
           },
         });
         setAccessToken(token);

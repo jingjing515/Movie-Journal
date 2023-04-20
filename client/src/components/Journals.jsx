@@ -1,16 +1,16 @@
-import "../style/todoList.css";
+import "../style/journalList.css";
 
 import { useState } from "react";
-import useTodos from "../hooks/useTodos";
+import useJournals from "../hooks/useJournals";
 import { useAuthToken } from "../AuthTokenContext";
 
-export default function Todos() {
+export default function Journals() {
   const [newItemText, setNewItemText] = useState("");
-  const [todosItems, setTodosItems] = useTodos();
+  const [journalsItems, setJournalsItems] = useJournals();
   const { accessToken } = useAuthToken();
 
-  async function insertTodo(title) {
-    const data = await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
+  async function insertJournal(title) {
+    const data = await fetch(`${process.env.REACT_APP_API_URL}/journals`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,8 +21,8 @@ export default function Todos() {
       }),
     });
     if (data.ok) {
-      const todo = await data.json();
-      return todo;
+      const journal = await data.json();
+      return journal;
     } else {
       return null;
     }
@@ -33,18 +33,18 @@ export default function Todos() {
 
     if (!newItemText) return;
 
-    const newTodo = await insertTodo(newItemText);
-    if (newTodo) {
-      setTodosItems([...todosItems, newTodo]);
+    const newJournal = await insertJournal(newItemText);
+    if (newJournal) {
+      setJournalsItems([...journalsItems, newJournal]);
       setNewItemText("");
     }
   };
 
   return (
-    <div className="todo-list">
+    <div className="journal-list">
       <form
         onSubmit={(e) => handleFormSubmit(e)}
-        className="todo-form"
+        className="journal-form"
         autoComplete="off"
       >
         <input
@@ -58,9 +58,9 @@ export default function Todos() {
       </form>
 
       <ul className="list">
-        {todosItems.map((item) => {
+        {journalsItems.map((item) => {
           return (
-            <li key={item.id} className="todo-item">
+            <li key={item.id} className="journal-item">
               <input
                 onChange={(e) => console.log(e.target)}
                 value={item.id}

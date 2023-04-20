@@ -3,7 +3,6 @@ import "../style/home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Home() {
   const navigate = useNavigate();
   const { isAuthenticated, loginWithRedirect } = useAuth0();
@@ -11,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      <h1>TODO App</h1>
+      <h1>Movie Journal App</h1>
       <div>
         {!isAuthenticated ? (
           <button className="btn-primary" onClick={loginWithRedirect}>
