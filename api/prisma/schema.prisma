@@ -34,6 +34,8 @@ model Movie {
   id      Int     @id@default(autoincrement())
   journalId Int
   title   String
+  director String
+  rating Float
   journals JournalItem @relation(fields: [journalId], references: [id])
   //not in migration?
 }
