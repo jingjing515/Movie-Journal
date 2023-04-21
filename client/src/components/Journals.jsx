@@ -54,7 +54,7 @@ export default function Journals() {
           value={newItemText}
           onChange={(e) => setNewItemText(e.target.value)}
         />
-        <button type="submit">+ Add Item</button>
+        <button type="submit">+ Add Journal</button>
       </form>
 
       <ul className="list">
