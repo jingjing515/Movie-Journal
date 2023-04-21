@@ -13,7 +13,7 @@ export default function AppLayout() {
   return (
     <div className="app">
       <div className="title">
-        <h1>My Journal</h1>
+        <h1>My Movie Journal</h1>
       </div>
       <div className="header">
         <nav className="menu">

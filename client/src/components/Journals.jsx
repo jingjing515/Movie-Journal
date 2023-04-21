@@ -1,15 +1,17 @@
 import "../style/journalList.css";
-
 import { useState } from "react";
 import useJournals from "../hooks/useJournals";
 import { useAuthToken } from "../AuthTokenContext";
 
 export default function Journals() {
-  const [newItemText, setNewItemText] = useState("");
+  // const [newItemText, setNewItemText] = useState("");
+  const [newItemTitle, setNewItemTitle] = useState("");
+  const [newItemContent, setNewItemContent] = useState("");
+  const [newItemMovie, setNewItemMovie] = useState("");
   const [journalsItems, setJournalsItems] = useJournals();
   const { accessToken } = useAuthToken();
 
-  async function insertJournal(title) {
+  async function insertJournal(title, content, movie) {
     const data = await fetch(`${process.env.REACT_APP_API_URL}/journals`, {
       method: "POST",
       headers: {
@@ -18,6 +20,8 @@ export default function Journals() {
       },
       body: JSON.stringify({
         title: title,
+        content: content,
+        movie: movie,
       }),
     });
     if (data.ok) {
@@ -31,12 +35,19 @@ export default function Journals() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (!newItemText) return;
+    if (!newItemTitle || !newItemContent || !newItemMovie) return;
 
-    const newJournal = await insertJournal(newItemText);
+    const newJournal = await insertJournal(
+      newItemTitle,
+      newItemContent,
+      newItemMovie
+    );
     if (newJournal) {
       setJournalsItems([...journalsItems, newJournal]);
-      setNewItemText("");
+      // setNewItemText("");
+      setNewItemTitle("");
+      setNewItemContent("");
+      setNewItemMovie("");
     }
   };
 
@@ -47,13 +58,41 @@ export default function Journals() {
         className="journal-form"
         autoComplete="off"
       >
-        <input
+        {/* <input
           type="text"
           name="item"
           id="item"
           value={newItemText}
           onChange={(e) => setNewItemText(e.target.value)}
+        /> */}
+
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Input title..."
+          value={newItemTitle}
+          onChange={(e) => setNewItemTitle(e.target.value)}
         />
+
+        <input
+          type="text"
+          name="content"
+          id="content"
+          placeholder="Input content..."
+          value={newItemContent}
+          onChange={(e) => setNewItemContent(e.target.value)}
+        />
+
+        <input
+          type="text"
+          name="movie"
+          id="movie"
+          placeholder="Input the movie..."
+          value={newItemMovie}
+          onChange={(e) => setNewItemMovie(e.target.value)}
+        />
+
         <button type="submit">+ Add Journal</button>
       </form>
 
@@ -61,13 +100,11 @@ export default function Journals() {
         {journalsItems.map((item) => {
           return (
             <li key={item.id} className="journal-item">
-              <input
-                onChange={(e) => console.log(e.target)}
-                value={item.id}
-                type="checkbox"
-                checked={item.completed}
-              />
               <span className="itemName">{item.title}</span>
+              <span className="itemContent">{item.content}</span>
+              {/* add content */}
+              <span className="itemMovie">{item.Movie}</span>
+              {/* add movie name? */}
               <button aria-label={`Remove ${item.title}`} value={item.id}>
                 X
               </button>

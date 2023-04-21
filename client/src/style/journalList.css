@@ -1,7 +1,9 @@
 /* JournalList Form */
 .journal-form {
   display: grid;
-  grid-template-columns: 1fr auto;
+  /* grid-template-columns: 1fr auto; */
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
 }
 
 .journal-list {
