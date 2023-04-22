@@ -25,6 +25,9 @@ export default function AppLayout() {
               <Link to="/app/journals">Journals</Link>
             </li>
             <li>
+              <Link to="/app/ombd">OMBD Page</Link>
+            </li>
+            <li>
               <Link to="/app/debugger">Auth Debugger</Link>
             </li>
             <li>

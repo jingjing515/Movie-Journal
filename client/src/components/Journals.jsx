@@ -12,7 +12,7 @@ export default function Journals() {
   const { accessToken } = useAuthToken();
 
   async function insertJournal(title, content, movie) {
-    const data = await fetch("http://localhost:8000/journals", {
+    const data = await fetch(`http://localhost:8000/journal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,6 +31,7 @@ export default function Journals() {
       return null;
     }
   }
+
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -51,6 +52,42 @@ export default function Journals() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const data = await fetch(`http://localhost:8000/journal`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        id
+      }),
+    });
+    setJournalsItems((current) =>
+    current.filter((item) => item.id !== id)
+  );
+ 
+  };
+
+  const handlePut = async (item) => {
+    alert(item.id);
+
+  //   const data = await fetch(`http://localhost:8000/journal`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify({
+  //       id
+  //     }),
+  //   });
+  //   setJournalsItems((current) =>
+  //   current.filter((item) => item.id !== id)
+  // );
+ 
+  };
+
   return (
     <div className="journal-list">
       <form
@@ -58,13 +95,6 @@ export default function Journals() {
         className="journal-form"
         autoComplete="off"
       >
-        {/* <input
-          type="text"
-          name="item"
-          id="item"
-          value={newItemText}
-          onChange={(e) => setNewItemText(e.target.value)}
-        /> */}
 
         <input
           type="text"
@@ -102,10 +132,8 @@ export default function Journals() {
             <li key={item.id} className="journal-item">
               <span className="itemName">{item.title}</span>
               <span className="itemContent">{item.content}</span>
-              {/* add content */}
-              <span className="itemMovie">{item.Movie}</span>
-              {/* add movie name? */}
-              <button aria-label={`Remove ${item.title}`} value={item.id}>
+              <span className="itemMovie">{item.movie}</span>
+              <button aria-label={`Remove ${item.title}`} value={item.id} onClick={(e) => handleDelete(item.id)}>
                 X
               </button>
             </li>

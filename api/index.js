@@ -26,13 +26,49 @@ app.get("/ping", (req, res) => {
   res.send("pong");
 });
 
-// GET: list of all notes
+app.post("/ping", (req, res) => {
+  res.send("pong");
+});
+
+// GET: list of all journals
 app.get("/journals", async (req, res) => {
   const notes = await prisma.journalItem.findMany()
   if (!notes) {
     res.sendStatus(404);
   }else{
     res.status(200).json(notes);
+  }
+});
+
+//POST: post a new journal
+app.post("/journal", async (req, res) => {
+  const { title, content, movie } = req.body;
+  const note = await prisma.journalItem.create({
+    data: {
+      title,
+      content,
+      movie
+    },
+  });
+  if (!note) {
+    res.sendStatus(404);
+  }else{
+    res.status(200).json(note);
+  }
+});
+
+// DELETE: delete a journal
+app.delete("/journal", async (req, res) => {
+  const { id } = req.body;
+  const note = await prisma.journalItem.delete({
+    where: {
+      id
+    },
+  });
+  if (!note) {
+    res.sendStatus(404);
+  }else{
+    res.status(200).json(note);
   }
 });
 

@@ -7,13 +7,13 @@ export default function useJournals() {
 
   useEffect(() => {
     async function getJournalsFromApi() {
-      const data = await fetch(`${process.env.REACT_APP_API_URL}/journals`, {
+      const data = await fetch(`http://localhost:8000/journals`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
       const journals = await data.json();
-
+      console.log(journals);
       setJournalsItems(journals);
     }
 

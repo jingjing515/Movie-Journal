@@ -5,6 +5,7 @@ import AppLayout from "./components/AppLayout";
 import Journals from "./components/Journals";
 import JournalDetail from "./components/JournalDetail";
 import Profile from "./components/Profile";
+import OMBDPage from "./components/OMBDPage";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import VerifyUser from "./components/VerifyUser";
@@ -68,6 +69,7 @@ root.render(
               <Route path="journals" element={<Journals />} />
               <Route path="journals/:journalId" element={<JournalDetail />} />
               <Route path="debugger" element={<AuthDebugger />} />
+              <Route path="ombd" element={<OMBDPage />} />
               <Route index element={<Profile />} />
             </Route>
             <Route path="*" element={<NotFound />} />
