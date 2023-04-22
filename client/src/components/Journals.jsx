@@ -12,7 +12,7 @@ export default function Journals() {
   const { accessToken } = useAuthToken();
 
   async function insertJournal(title, content, movie) {
-    const data = await fetch(`${process.env.REACT_APP_API_URL}/journals`, {
+    const data = await fetch("http://localhost:8000/journals", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
