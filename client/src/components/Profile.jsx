@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { useAuthToken } from "../AuthTokenContext";
+import "../style/appLayout.css";
 
 export default function Profile() {
   const { user } = useAuth0();
@@ -46,7 +47,9 @@ export default function Profile() {
       </div>
       <div>
         <p>📧 Email: {user.email}</p>
-        <button onClick={handleNameChange}>Edit Name</button>
+        <button className="name-button" onClick={handleNameChange}>
+          Edit Name
+        </button>
       </div>
 
       {/* <div>

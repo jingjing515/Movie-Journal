@@ -2,6 +2,7 @@ import "../style/journalList.css";
 import { useState } from "react";
 import useJournals from "../hooks/useJournals";
 import { useAuthToken } from "../AuthTokenContext";
+import "../style/appLayout.css";
 
 export default function Journals() {
   // const [newItemText, setNewItemText] = useState("");
@@ -71,20 +72,6 @@ export default function Journals() {
 
   const handlePut = async (item) => {
     alert(item.id);
-
-  //   const data = await fetch(`http://localhost:8000/journal`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //     body: JSON.stringify({
-  //       id
-  //     }),
-  //   });
-  //   setJournalsItems((current) =>
-  //   current.filter((item) => item.id !== id)
-  // );
  
   };
 
@@ -123,7 +110,9 @@ export default function Journals() {
           onChange={(e) => setNewItemMovie(e.target.value)}
         />
 
-        <button type="submit">+ Add Journal</button>
+        <button className="button" type="submit">
+          + Add Journal
+        </button>
       </form>
 
       <ul className="list">

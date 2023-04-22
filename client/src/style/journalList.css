@@ -28,13 +28,13 @@
   border-bottom: 1px solid var(--gray);
 }
 
-.journal-item input[type="checkbox"] {
+/* .journal-item input[type="checkbox"] {
   margin-right: 1rem;
 }
 
 .journal-item input[type="checkbox"]:checked + .itemName {
   opacity: 0.5;
-}
+} */
 
 .journal-item button {
   padding: 0;

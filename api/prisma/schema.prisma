@@ -15,14 +15,12 @@ model User {
   email    String        @unique
   name     String
 }
-
 model JournalItem {
   id      Int     @id @default(autoincrement())
   title   String
   content String
   movie   String
 }
-
 model Movie {
   id        Int         @id @default(autoincrement())
   title     String
