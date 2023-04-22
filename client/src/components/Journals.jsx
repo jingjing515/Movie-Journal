@@ -2,6 +2,7 @@ import "../style/journalList.css";
 import { useState } from "react";
 import useJournals from "../hooks/useJournals";
 import { useAuthToken } from "../AuthTokenContext";
+import "../style/appLayout.css";
 
 export default function Journals() {
   // const [newItemText, setNewItemText] = useState("");
@@ -93,7 +94,9 @@ export default function Journals() {
           onChange={(e) => setNewItemMovie(e.target.value)}
         />
 
-        <button type="submit">+ Add Journal</button>
+        <button className="button" type="submit">
+          + Add Journal
+        </button>
       </form>
 
       <ul className="list">
@@ -105,7 +108,11 @@ export default function Journals() {
               {/* add content */}
               <span className="itemMovie">{item.Movie}</span>
               {/* add movie name? */}
-              <button aria-label={`Remove ${item.title}`} value={item.id}>
+              <button
+                className="item-button"
+                aria-label={`Remove ${item.title}`}
+                value={item.id}
+              >
                 X
               </button>
             </li>

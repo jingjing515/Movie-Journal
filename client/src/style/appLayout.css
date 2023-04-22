@@ -4,13 +4,13 @@
 
 .title {
   font-size: 12px;
-  border: 1px solid rgb(0, 255, 179);
+  border: 1px solid #d1c4e9;
   text-align: center;
 }
 
 .header {
   width: 100%;
-  border: 1px solid orange;
+  border: 1px solid #d2bb79;
 
   display: flex;
   align-items: center;
@@ -36,14 +36,44 @@
 }
 
 .exit-button {
-  background-color: lightcoral;
+  background-color: #d28679;
+  border: #d28679;
+}
+
+.button {
+  background-color: #c4def6;
+  border: #7982d2;
+  width: 100px;
+  height: 50px;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.item-button {
+  background-color: #c4def6;
+  border: #7982d2;
+  width: 20px;
+  height: 20px;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+.name-button {
+  background-color: #c4def6;
+  border: #7982d2;
+  width: 100px;
+  height: 20px;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
 }
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: lightcoral;
+  background-color: #73b0f1;
   color: aliceblue;
   height: 100%;
   font-size: 36px;

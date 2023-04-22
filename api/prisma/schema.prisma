@@ -19,7 +19,6 @@ model User {
   journals JournalItem[]
   //not in migration?
 }
-
 model JournalItem {
   id      Int     @id@default(autoincrement())
   authorId  Int     
@@ -29,7 +28,6 @@ model JournalItem {
   Movie   Movie[]
   //not in migration?
 }
-
 model Movie {
   id      Int     @id@default(autoincrement())
   journalId Int
