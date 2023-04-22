@@ -29,12 +29,6 @@ export default function Profile() {
     }
   };
 
-  // const handleNameChange = () => {
-  //   const newName = window.prompt("Enter your new user name", name);
-  //   if (newName) {
-  //     setName(newName);
-  //   }
-  // };
 
   return (
     <div>

@@ -27,9 +27,9 @@ export default function AppLayout() {
             <li>
               <Link to="/app/ombd">OMBD Page</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/app/debugger">Auth Debugger</Link>
-            </li>
+            </li> */}
             <li>
               <button
                 className="exit-button"

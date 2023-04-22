@@ -46,7 +46,7 @@ export default function Journals() {
     );
     if (newJournal) {
       setJournalsItems([...journalsItems, newJournal]);
-      // setNewItemText("");
+
       setNewItemTitle("");
       setNewItemContent("");
       setNewItemMovie("");
@@ -70,10 +70,31 @@ export default function Journals() {
  
   };
 
-  const handlePut = async (item) => {
-    alert(item.id);
- 
+  const handleDetails = async (item) => {
+    const newContent = window.prompt("Current content: \n"+item.content +"\n New Content");
+    //window.open('childcomponent.js','Data','height=250,width=250');
+    if (newContent) {
+      const data = await fetch(`http://localhost:8000/journal`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          id:item.id,
+          content: newContent
+        }),
+      });
+      if (data.ok) {
+
+        window.location.reload(false);
+  
+      } else {
+        console.error("Failed to update user name");
+      }
+    }
   };
+
 
   return (
     <div className="journal-list">
@@ -119,11 +140,15 @@ export default function Journals() {
         {journalsItems.map((item) => {
           return (
             <li key={item.id} className="journal-item">
-              <span className="itemName">{item.title}</span>
-              <span className="itemContent">{item.content}</span>
-              <span className="itemMovie">{item.movie}</span>
+               <span className="itemId">ID: {item.id}</span>
+              <span className="itemName">Title: {item.title}</span>
+              {/* <span className="itemContent">{item.content}</span> */}
+              {/* <span className="itemMovie">{item.movie}</span> */}
               <button aria-label={`Remove ${item.title}`} value={item.id} onClick={(e) => handleDelete(item.id)}>
                 X
+              </button>
+              <button onClick={(e) => handleDetails(item)}>
+               Show Content & Modify
               </button>
             </li>
           );

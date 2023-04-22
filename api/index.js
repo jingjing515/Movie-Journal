@@ -40,6 +40,22 @@ app.get("/journals", async (req, res) => {
   }
 });
 
+// GET: get a journal
+app.get("/journal/:id", async (req, res,next) => {
+  const id = req.params.id;
+  // check ID exisit
+  const note = await prisma.journalItem.findUnique({
+    where: {
+      id: parseInt(id),
+    },
+  });
+  if (!note) {
+    res.sendStatus(404);
+  }else{
+    res.status(200).json(note);
+  }
+});
+
 //POST: post a new journal
 app.post("/journal", async (req, res) => {
   const { title, content, movie } = req.body;
@@ -72,7 +88,24 @@ app.delete("/journal", async (req, res) => {
   }
 });
 
-
+// PUT: update a journal
+app.put("/journal", async (req, res) => {
+  const { id, content } = req.body;
+  //console.log("Test");
+  const posts = await prisma.journalItem.update({
+    where: {
+      id
+    },
+    data: {
+      content
+    },
+  });
+  if (!posts) {
+    res.sendStatus(404);
+  }else{
+    res.status(200).json(posts);
+  }
+});
 
 app.listen(8000, () => {
   console.log("Server running on http://localhost:8000 🎉 🚀");
