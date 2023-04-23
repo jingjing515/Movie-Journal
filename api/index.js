@@ -107,6 +107,24 @@ app.put("/journal", async (req, res) => {
   }
 });
 
+//POST: post a new movie
+app.post("/movie", async (req, res) => {
+  const { title, director,rating} = req.body;
+  const note = await prisma.movie.create({
+    data: {
+      title,
+      director,
+      rating
+    },
+  });
+  if (!note) {
+    res.sendStatus(404);
+  }else{
+    res.status(200).json(note);
+  }
+});
+
+
 app.listen(8000, () => {
   console.log("Server running on http://localhost:8000 🎉 🚀");
 });

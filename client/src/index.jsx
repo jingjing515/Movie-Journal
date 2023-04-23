@@ -7,7 +7,10 @@ import JournalDetail from "./components/JournalDetail";
 import Profile from "./components/Profile";
 import OMBDPage from "./components/OMBDPage";
 import NotFound from "./components/NotFound";
+//import Home from "./components/Login";
+import Login from "./components/Login";
 import Home from "./components/Home";
+
 import VerifyUser from "./components/VerifyUser";
 import AuthDebugger from "./components/AuthDebugger";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
@@ -65,7 +68,8 @@ root.render(
                   <AppLayout />
                 </RequireAuth>
               }
-            >
+            > 
+              <Route path="login" element={<Login />} />
               <Route path="journals" element={<Journals />} />
               <Route path="journals/:journalId" element={<JournalDetail />} />
               <Route path="debugger" element={<AuthDebugger />} />

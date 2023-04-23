@@ -12,9 +12,9 @@ export default function AppLayout() {
 
   return (
     <div className="app">
-      <div className="title">
+      {/* <div className="title">
         <h1>My Movie Journal</h1>
-      </div>
+      </div> */}
       <div className="header">
         <nav className="menu">
           <ul className="menu-list">
@@ -40,7 +40,7 @@ export default function AppLayout() {
             </li>
           </ul>
         </nav>
-        <div>Welcome 👋 {user.name} </div>
+        {/* <div>Welcome 👋 {user.name} </div> */}
       </div>
       <div className="content">
         <Outlet />

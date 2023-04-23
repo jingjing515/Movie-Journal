@@ -11,21 +11,7 @@ export default function Profile() {
   const handleNameChange = async () => {
     const newName = window.prompt("Enter your new user name", name);
     if (newName) {
-      const data = await fetch(`${process.env.REACT_APP_API_URL}/app`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          name: newName,
-        }),
-      });
-      if (data.ok) {
-        setName(newName);
-      } else {
-        console.error("Failed to update user name");
-      }
+      setName(newName);
     }
   };
 
