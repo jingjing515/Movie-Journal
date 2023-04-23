@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuthToken } from "../AuthTokenContext";
 
@@ -15,13 +15,16 @@ export default function JournalDetail() {
 
   useEffect(() => {
     async function getJournalFromApi() {
-      const data = await fetch(`http://localhost:8000/journal/` + params.journalId, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const data = await fetch(
+        `http://localhost:8000/journal/` + params.journalId,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       const journal = await data.json();
-      console.log(journal)
+      console.log(journal);
       //setJournalItem(journal);
 
       setNewItemTitle(journal.title);
@@ -37,11 +40,21 @@ export default function JournalDetail() {
   return (
     <div>
       <div>
-        <h2>Title: {newItemTitle}</h2><br/>
+        <h2>Title: {newItemTitle}</h2>
+        <br />
       </div>
-      <div><body>Content: {newItemContent}</body></div>
-      <div><body>Movie: {newItemMovie}</body></div>
-   </div>
-
+      {/* <div>
+        <body>Content: {newItemContent}</body>
+      </div>
+      <div>
+        <body>Movie: {newItemMovie}</body>
+      </div> */}
+      <div>
+        <p>Content: {newItemContent}</p>
+      </div>
+      <div>
+        <p>Movie: {newItemMovie}</p>
+      </div>
+    </div>
   );
 }
