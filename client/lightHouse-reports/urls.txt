@@ -1,0 +1,9 @@
+http://localhost:3000/
+http://localhost:3000/verify-user
+http://localhost:3000/app/login
+http://localhost:3000/app/journals
+http://localhost:3000/app/journals/:journalId
+http://localhost:3000/app/debugger
+http://localhost:3000/app/ombd
+http://localhost:3000/app/profile
+http://localhost:3000/*
