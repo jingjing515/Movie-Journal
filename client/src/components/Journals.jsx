@@ -33,7 +33,6 @@ export default function Journals() {
     }
   }
 
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,17 +60,16 @@ export default function Journals() {
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
-        id
+        id,
       }),
     });
-    setJournalsItems((current) =>
-    current.filter((item) => item.id !== id)
-  );
- 
+    setJournalsItems((current) => current.filter((item) => item.id !== id));
   };
 
   const handleDetails = async (item) => {
-    const newContent = window.prompt("Current content: \n"+item.content +"\n New Content");
+    const newContent = window.prompt(
+      "Current content: \n" + item.content + "\n New Content"
+    );
     //window.open('childcomponent.js','Data','height=250,width=250');
     if (newContent) {
       const data = await fetch(`http://localhost:8000/journal`, {
@@ -81,20 +79,17 @@ export default function Journals() {
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          id:item.id,
-          content: newContent
+          id: item.id,
+          content: newContent,
         }),
       });
       if (data.ok) {
-
         window.location.reload(false);
-  
       } else {
-        console.error("Failed to update user name");
+        console.error("Failed to update journal details");
       }
     }
   };
-
 
   return (
     <div className="journal-list">
@@ -103,7 +98,6 @@ export default function Journals() {
         className="journal-form"
         autoComplete="off"
       >
-
         <input
           type="text"
           name="title"
@@ -140,15 +134,19 @@ export default function Journals() {
         {journalsItems.map((item) => {
           return (
             <li key={item.id} className="journal-item">
-               <span className="itemId">ID: {item.id}</span>
+              <span className="itemId">ID: {item.id}</span>
               <span className="itemName">Title: {item.title}</span>
               {/* <span className="itemContent">{item.content}</span> */}
               {/* <span className="itemMovie">{item.movie}</span> */}
-              <button aria-label={`Remove ${item.title}`} value={item.id} onClick={(e) => handleDelete(item.id)}>
+              <button
+                aria-label={`Remove ${item.title}`}
+                value={item.id}
+                onClick={(e) => handleDelete(item.id)}
+              >
                 X
               </button>
               <button onClick={(e) => handleDetails(item)}>
-               Show Content & Modify
+                Show Content & Modify
               </button>
             </li>
           );

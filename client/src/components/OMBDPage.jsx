@@ -6,37 +6,34 @@ import MovieList from "./MovieList";
 import MovieHeadings from "./MovieHeadings";
 import SearchBox from "./SearchBox";
 
-
 export default function OMBDPage() {
+  const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
+  const getMovieRequest = async (searchValue) => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
 
-	const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+    const response = await fetch(url);
+    const responseJson = await response.json();
 
-	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=263d22d8`;
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    }
+  };
 
-		const response = await fetch(url);
-		const responseJson = await response.json();
+  useEffect(() => {
+    getMovieRequest(searchValue);
+  }, [searchValue]);
 
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
-		}
-	};
-
-	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
-
-	return (
-		<div className='container-fluid movie-app'>
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-				<MovieHeadings heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
-			<div className='row'>
-				<MovieList movies={movies} />
-			</div>
-		</div>
-	);
+  return (
+    <div className="container-fluid movie-app">
+      <div className="row d-flex align-items-center mt-4 mb-4">
+        <MovieHeadings heading="Movies" />
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+      </div>
+      <div className="row">
+        <MovieList movies={movies} />
+      </div>
+    </div>
+  );
 }

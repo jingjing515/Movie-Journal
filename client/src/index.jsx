@@ -34,11 +34,11 @@ const requestedScopes = [
 ];
 
 function RequireAuth({ children }) {
-  const { isAuthenticated, isLoading } = useAuth0();
+  // const { isAuthenticated, isLoading } = useAuth0();
 
-  if (!isLoading && !isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
+  // if (!isLoading && !isAuthenticated) {
+  //   return <Navigate to="/" replace />;
+  // }
 
   return children;
 }
@@ -68,7 +68,7 @@ root.render(
                   <AppLayout />
                 </RequireAuth>
               }
-            > 
+            >
               <Route path="login" element={<Login />} />
               <Route path="journals" element={<Journals />} />
               <Route path="journals/:journalId" element={<JournalDetail />} />

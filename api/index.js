@@ -32,16 +32,16 @@ app.post("/ping", (req, res) => {
 
 // GET: list of all journals
 app.get("/journals", async (req, res) => {
-  const notes = await prisma.journalItem.findMany()
+  const notes = await prisma.journalItem.findMany();
   if (!notes) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(notes);
   }
 });
 
 // GET: get a journal
-app.get("/journal/:id", async (req, res,next) => {
+app.get("/journal/:id", async (req, res, next) => {
   const id = req.params.id;
   // check ID exisit
   const note = await prisma.journalItem.findUnique({
@@ -51,7 +51,7 @@ app.get("/journal/:id", async (req, res,next) => {
   });
   if (!note) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(note);
   }
 });
@@ -63,12 +63,12 @@ app.post("/journal", async (req, res) => {
     data: {
       title,
       content,
-      movie
+      movie,
     },
   });
   if (!note) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(note);
   }
 });
@@ -78,12 +78,12 @@ app.delete("/journal", async (req, res) => {
   const { id } = req.body;
   const note = await prisma.journalItem.delete({
     where: {
-      id
+      id,
     },
   });
   if (!note) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(note);
   }
 });
@@ -94,36 +94,45 @@ app.put("/journal", async (req, res) => {
   //console.log("Test");
   const posts = await prisma.journalItem.update({
     where: {
-      id
+      id,
     },
     data: {
-      content
+      content,
     },
   });
   if (!posts) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(posts);
   }
 });
 
 //POST: post a new movie
 app.post("/movie", async (req, res) => {
-  const { title, director,rating} = req.body;
+  const { title, director, rating } = req.body;
   const note = await prisma.movie.create({
     data: {
       title,
       director,
-      rating
+      rating,
     },
   });
   if (!note) {
     res.sendStatus(404);
-  }else{
+  } else {
     res.status(200).json(note);
   }
 });
 
+// GET: get a movie
+app.get("/movie", async (req, res) => {
+  const notes = await prisma.movie.findUnique();
+  if (!notes) {
+    res.sendStatus(404);
+  } else {
+    res.status(200).json(notes);
+  }
+});
 
 app.listen(8000, () => {
   console.log("Server running on http://localhost:8000 🎉 🚀");
