@@ -2,9 +2,12 @@ import "../style/appLayout.css";
 
 import { Outlet, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAuthToken } from "../AuthTokenContext";
 
 export default function AppLayout() {
-  const { user, isLoading, logout } = useAuth0();
+  const { user, isLoading, isAuthenticated, logout } = useAuth0();
+  const { accessToken } = useAuthToken();
+  //   const { accessToken, isAuthenticated } = useAuth();
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
@@ -31,12 +34,16 @@ export default function AppLayout() {
               <Link to="/app/debugger">Auth Debugger</Link>
             </li> */}
             <li>
-              <button
-                className="exit-button"
-                onClick={() => logout({ returnTo: window.location.origin })}
-              >
-                LogOut
-              </button>
+              {isAuthenticated ? (
+                <button
+                  className="exit-button"
+                  onClick={() => logout({ returnTo: window.location.origin })}
+                >
+                  LogOut
+                </button>
+              ) : (
+                <Link to="/app/login">Login</Link>
+              )}
             </li>
           </ul>
         </nav>
