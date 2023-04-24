@@ -3,8 +3,20 @@ import { useState } from "react";
 import useJournals from "../hooks/useJournals";
 import { useAuthToken } from "../AuthTokenContext";
 import "../style/appLayout.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 export default function Journals() {
+  const { user, isAuthenticated } = useAuth0();
+
+  // const [name, setName] = useState("");
+
+  // useEffect(() => {
+  //   if (user && user.name) {
+  //     setName(user.name);
+  //   }
+  // }, [user]);
+
   // const [newItemText, setNewItemText] = useState("");
   const [newItemTitle, setNewItemTitle] = useState("");
   const [newItemContent, setNewItemContent] = useState("");
@@ -92,66 +104,72 @@ export default function Journals() {
   };
 
   return (
-    <div className="journal-list">
-      <form
-        onSubmit={(e) => handleFormSubmit(e)}
-        className="journal-form"
-        autoComplete="off"
-      >
-        <input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="Input title..."
-          value={newItemTitle}
-          onChange={(e) => setNewItemTitle(e.target.value)}
-        />
+    <>
+      {isAuthenticated ? (
+        <div className="journal-list">
+          <form
+            onSubmit={(e) => handleFormSubmit(e)}
+            className="journal-form"
+            autoComplete="off"
+          >
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Input title..."
+              value={newItemTitle}
+              onChange={(e) => setNewItemTitle(e.target.value)}
+            />
 
-        <input
-          type="text"
-          name="content"
-          id="content"
-          placeholder="Input content..."
-          value={newItemContent}
-          onChange={(e) => setNewItemContent(e.target.value)}
-        />
+            <input
+              type="text"
+              name="content"
+              id="content"
+              placeholder="Input content..."
+              value={newItemContent}
+              onChange={(e) => setNewItemContent(e.target.value)}
+            />
 
-        <input
-          type="text"
-          name="movie"
-          id="movie"
-          placeholder="Input the movie..."
-          value={newItemMovie}
-          onChange={(e) => setNewItemMovie(e.target.value)}
-        />
+            <input
+              type="text"
+              name="movie"
+              id="movie"
+              placeholder="Input the movie..."
+              value={newItemMovie}
+              onChange={(e) => setNewItemMovie(e.target.value)}
+            />
 
-        <button className="button" type="submit">
-          + Add Journal
-        </button>
-      </form>
+            <button className="button" type="submit">
+              + Add Journal
+            </button>
+          </form>
 
-      <ul className="list">
-        {journalsItems.map((item) => {
-          return (
-            <li key={item.id} className="journal-item">
-              <span className="itemId">ID: {item.id}</span>
-              <span className="itemName">Title: {item.title}</span>
-              {/* <span className="itemContent">{item.content}</span> */}
-              {/* <span className="itemMovie">{item.movie}</span> */}
-              <button
-                aria-label={`Remove ${item.title}`}
-                value={item.id}
-                onClick={(e) => handleDelete(item.id)}
-              >
-                X
-              </button>
-              <button onClick={(e) => handleDetails(item)}>
-                Show Content & Modify
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+          <ul className="list">
+            {journalsItems.map((item) => {
+              return (
+                <li key={item.id} className="journal-item">
+                  <span className="itemId">ID: {item.id}</span>
+                  <span className="itemName">Title: {item.title}</span>
+                  {/* <span className="itemContent">{item.content}</span> */}
+                  {/* <span className="itemMovie">{item.movie}</span> */}
+                  <button
+                    aria-label={`Remove ${item.title}`}
+                    value={item.id}
+                    onClick={(e) => handleDelete(item.id)}
+                  >
+                    X
+                  </button>
+                  <button onClick={(e) => handleDetails(item)}>
+                    Show Content & Modify
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <span>Please log in to access this page.</span>
+      )}
+    </>
   );
 }

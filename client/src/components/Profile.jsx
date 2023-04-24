@@ -50,7 +50,7 @@ export default function Profile() {
         </div>
       ) : (
         // <span>Please login </span>
-        <Link to="/app/login">Go to login/ create account</Link>
+        <Link to="/app/login">Please log in to access this page.</Link>
       )}
     </>
   );

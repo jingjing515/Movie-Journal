@@ -42,7 +42,7 @@ const MovieList = (props) => {
             {isAuthenticated ? (
               <button onClick={(e) => handleAdd(movie)}>Add to database</button>
             ) : (
-              <span>Login to like the movie</span>
+              <span>Login to like this movie</span>
             )}
           </li>
           <img src={movie.Poster} alt="movie"></img>
