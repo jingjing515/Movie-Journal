@@ -1,4 +1,1 @@
-*.min.js linguist-vendored
-*.min.css linguist-vendored
-dist/* linguist-vendored
-build/* linguist-vendored
+*.js linguist-vendored=false
