@@ -1,1 +1,2 @@
-*.js linguist-vendored=false
+lightHouse-reports/* linguist-vendored
+*.css linguist-detectable
